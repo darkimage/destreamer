@@ -205,9 +205,9 @@ async function downloadVideo(videoGUIDs: Array<string>, outputDirectories: Array
         const cleanupFn: () => void = () => {
             pbar.stop();
 
-           if (argv.noCleanup) {
-               return;
-           }
+            if (argv.noCleanup) {
+                return;
+            }
 
             try {
                 fs.unlinkSync(video.outPath);
