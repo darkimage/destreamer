@@ -1,3 +1,9 @@
+import process from 'process';
+import path from 'path';
+import fs from 'fs';
+
+import ffmpegPath from './ffmpeg-bundle';
+
 import { argv } from './CommandLineParser';
 import { ERROR_CODE } from './Errors';
 import { setProcessEvents } from './Events';
@@ -10,12 +16,12 @@ import { checkRequirements, ffmpegTimemarkToChunk, parseInputFile, parseCLIinput
 import { getVideoInfo, createUniquePath } from './VideoUtils';
 
 import cliProgress from 'cli-progress';
-import fs from 'fs';
 import isElevated from 'is-elevated';
 import puppeteer from 'puppeteer';
 
-
-const { FFmpegCommand, FFmpegInput, FFmpegOutput } = require('@tedconf/fessonia')();
+const { FFmpegCommand, FFmpegInput, FFmpegOutput } = require('@tedconf/fessonia')({
+    ffmpeg_bin: ffmpegPath
+});
 const tokenCache: TokenCache = new TokenCache();
 export const chromeCacheFolder = '.chrome_data';
 
