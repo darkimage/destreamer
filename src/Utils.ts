@@ -6,6 +6,7 @@ import { Session } from './Types';
 import { AxiosResponse } from 'axios';
 import { execSync } from 'child_process';
 import fs from 'fs';
+import ffmpegPath from './ffmpeg-bundle';
 
 
 async function extractGuids(url: string, client: ApiClient): Promise<Array<string> | null> {
@@ -181,10 +182,11 @@ export function checkOutDir(directory: string): boolean {
 
 export function checkRequirements(): void {
     try {
-        const ffmpegVer: string = execSync('ffmpeg -version').toString().split('\n')[0];
+        const ffmpegVer: string = execSync(`${ffmpegPath} -version`).toString().split('\n')[0];
         logger.verbose(`Using ${ffmpegVer}\n`);
     }
     catch (e) {
+        console.log(e)
         process.exit(ERROR_CODE.MISSING_FFMPEG);
     }
 }
