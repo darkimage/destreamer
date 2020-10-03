@@ -14,6 +14,7 @@ if (require('./isStandAlone').default) {
 	// maybe there is away to access it inside the pkg snapshop but i didn't find any for now.
 	fs.copyFileSync(ffmpegPath, path.join(path.dirname(process.execPath), path.basename(ffmpegPath)))
 	ffmpegPath = path.join(path.dirname(process.execPath), path.basename(ffmpegPath))
+	fs.chmodSync(ffmpegPath, 0o755)
 }
 
 export default ffmpegPath;
